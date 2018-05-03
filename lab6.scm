@@ -1,9 +1,43 @@
 (define llave "")
+(define var3 (make-vector 1))
 (define (setkey nueva)
   (set! llave nueva)
   (display "resultado >> nueva llave aceptada \n")
   (inicio)
   )
+
+(define (distinto chr)
+  (define res #f)
+  (let ciclo
+    ([cont 65])
+    (if (< cont 91)
+     (if (char=? (char-upcase chr)(integer->char cont))
+         (set! res #t)
+         (ciclo (+ cont 1))
+         )
+     )
+    )
+  res
+  )
+  
+(define (usekey var2)
+  (do
+    ([cont 0 (+ cont 1)]
+     [pos 0 pos])
+    ((= cont (string-length var2)) )
+    (if (distinto (string-ref var2 cont))
+       (begin
+         (vector-set! var3 cont (string-ref llave pos))
+         (set! pos (+ pos 1))
+         (if (= pos (string-length llave))
+             (set! pos 0)
+             )
+         )
+        (vector-set! var3 cont (string-ref var2 cont))
+      )
+    )
+  (display var3)
+ )
 
 (define (quit)
   (display "Saliendo ... \n")
@@ -12,6 +46,9 @@
 
 (define (encode-text var2)
   (display var2)
+  (set! var3 (make-vector (string-length var2)))
+  (usekey var2)
+  (inicio)
   )
 
 (define (decode-text var2)
@@ -65,7 +102,7 @@
 )
 
 (define (inicio)
-  (display "Codificador >> ")
+  (display "Codificador>>")
   (define instruccion (read-line))
   (menu instruccion)
 )
