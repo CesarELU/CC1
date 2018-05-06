@@ -108,10 +108,12 @@
 
 
 (define (setkey nueva)
-  (set! llave nueva)
-  (display "resultado >> nueva llave aceptada \n")
-  (inicio)
-  )
+  (do
+      ((cont 0 (+ cont 1)))
+    ((= cont (string-length nueva)))
+    (if (eq? (string-ref nueva cont) #\space)
+        (invalido)))
+  (set! llave nueva))
 
 (define (distinto chr)
   (define res #f)
@@ -318,6 +320,7 @@
   (define pos 0)
   (define var "")
   (define var2 "")
+  (define nuevaLlave "")
   (do
       ([cont 0 (+ cont 1)])
       ((or (= cont (string-length instruccion))(equal? (substring instruccion cont (+ cont 1)) " ")) (set! pos cont))
@@ -326,13 +329,16 @@
   (if (not (= pos (string-length instruccion)))
       (set! var2 (substring instruccion (+ pos 1) (string-length instruccion)))
       )
+  (if (and (= (string-length var2) 0) (not (equal? var "quit")))
+      (invalido))
+  
   (cond 
-    [(equal? "setkey" var)(setkey var2)]
+    [(equal? "setkey" var)(display "resultado >> nueva llave aceptada \n")(setkey var2)(inicio)]
     [(equal? "quit" var)(quit)]
     [(equal? "encode-text" var)(encode-text var2)]
     [(equal? "decode-text" var)(decode-text var2)]
-    [(equal? "encode-file" var)(encode-file var2)]
-    [(equal? "decode-file" var)(decode-file var2)]
+    [(equal? "encode-file" var)(do ((cont 1 (+ cont 1)))((= cont (string-length var2)))(if (eq? (string-ref var2 cont) #\space)(begin (set! nuevaLlave (substring var2 0 cont))(set! var2 (substring var2 (+ cont 1) (string-length var2)))(setkey nuevaLlave))))(encode-file var2)]
+    [(equal? "decode-file" var)(do ((cont 1 (+ cont 1)))((= cont (string-length var2)))(if (eq? (string-ref var2 cont) #\space)(begin (set! nuevaLlave (substring var2 0 cont))(set! var2 (substring var2 (+ cont 1) (string-length var2)))(setkey nuevaLlave))))(decode-file var2)]
     [else (invalido)]
   )
 )
