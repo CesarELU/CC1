@@ -1,5 +1,35 @@
 (define llave "")
-(define var3 (make-vector 1))
+(define matriz (vector
+  (vector #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z)
+  (vector #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A)
+  (vector #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B)
+  (vector #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C)
+  (vector #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D)
+  (vector #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E)
+  (vector #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F)
+  (vector #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G)
+  (vector #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H)
+  (vector #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I)
+  (vector #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J)
+  (vector #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K)
+  (vector #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L)
+  (vector #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M)
+  (vector #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N)
+  (vector #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O)
+  (vector #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P)
+  (vector #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q)
+  (vector #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R)
+  (vector #\T #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S)
+  (vector #\U #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T)
+  (vector #\V #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U)
+  (vector #\W #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V)
+  (vector #\X #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W)
+  (vector #\Y #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X)
+  (vector #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y)
+  )
+ )
+(define var3 "")
+
 (define (setkey nueva)
   (set! llave nueva)
   (display "resultado >> nueva llave aceptada \n")
@@ -17,27 +47,109 @@
          )
      )
     )
+  (cond
+    [(char=? chr #\é) (set! res #t)]
+    [(char=? chr #\á) (set! res #t)]
+    [(char=? chr #\í) (set! res #t)]
+    [(char=? chr #\ó) (set! res #t)]
+    [(char=? chr #\ú) (set! res #t)]
+    )
   res
   )
   
 (define (usekey var2)
+  (set! var3 "")
   (do
     ([cont 0 (+ cont 1)]
      [pos 0 pos])
     ((= cont (string-length var2)) )
     (if (distinto (string-ref var2 cont))
        (begin
-         (vector-set! var3 cont (string-ref llave pos))
+         (set! var3 (string-append var3 (substring llave pos (+ pos 1))))
          (set! pos (+ pos 1))
          (if (= pos (string-length llave))
              (set! pos 0)
              )
          )
-        (vector-set! var3 cont (string-ref var2 cont))
+        (set! var3 (string-append var3 (substring var2 cont (+ cont 1))))
       )
     )
-  (display var3)
  )
+
+(define (codificar var2)
+  (define pos1 0)
+  (define pos2 0)
+  (define res "")
+  (define let "")
+  (do
+      ([pos 0 (+ pos 1)]
+       [pas #f #f])
+    ((= pos (string-length var2)))
+    (set! let (string-ref var2 pos))
+    (if (or (and (> (char->integer let) 64)(< (char->integer let) 91))(and (> (char->integer let) 96)(< (char->integer let) 123)))
+        (set! pas #t)
+    )
+  
+    (if (char=? let #\é)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\e)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\á)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\a)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\í)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\i)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\ó)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\o)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\ú)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\u)
+          (set! pas #t)
+          )
+      )
+    
+    (if pas
+        (begin
+          (do
+              ([cont 0 (+ cont 1)])
+            ((char=? (vector-ref (vector-ref matriz cont) 0)(char-upcase let)) (set! pos1 cont))
+            )
+          (do
+              ([cont 0 (+ cont 1)])
+            ((char=? (vector-ref (vector-ref matriz 0) cont)(char-upcase (string-ref var3 pos))) (set! pos2 cont))
+            )
+          (cond
+           [(and (> (char->integer let) 64)(< (char->integer let) 91)) (set! res (string-append res (string (char-upcase (vector-ref (vector-ref matriz pos1) pos2)))))]
+           [(and (> (char->integer let) 96)(< (char->integer let) 123)) (set! res (string-append res (string (char-downcase (vector-ref (vector-ref matriz pos1) pos2)))))]
+          )
+          )
+        (set! res (string-append res (substring var2 pos (+ pos 1))))
+        )
+    )
+  res
+  )
 
 (define (quit)
   (display "Saliendo ... \n")
@@ -45,9 +157,8 @@
   )
 
 (define (encode-text var2)
-  (display var2)
-  (set! var3 (make-vector (string-length var2)))
   (usekey var2)
+  (display (string-append "resultado >> " (codificar var2) "\n"))
   (inicio)
   )
 
