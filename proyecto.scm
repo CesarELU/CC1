@@ -35,6 +35,7 @@
   (define pos 0)
   (define letraLlave "")
   (define posLlave 0)
+  (define res "")
   (do
     ((cont 0 (+ cont 1)))
     ((= cont (string-length palabra)))
@@ -43,23 +44,24 @@
     (set! pos (char->integer letra))
     (set! posLlave (char->integer letraLlave))
     (cond
-      [(= pos 225)(display (integer->char 92))(set! pos 97)] ;á
-      [(= pos 233)(display (integer->char 92))(set! pos 101)] ;é
-      [(= pos 237)(display (integer->char 92))(set! pos 105)] ;í
-      [(= pos 243)(display (integer->char 92))(set! pos 111)] ;ó
-      [(= pos 250)(display (integer->char 92))(set! pos 117)] ;ú
-      [(= pos 193)(display (integer->char 92))(set! pos 65)] ;Á
-      [(= pos 201)(display (integer->char 92))(set! pos 69)] ;É
-      [(= pos 205)(display (integer->char 92))(set! pos 73)] ;Í
-      [(= pos 211)(display (integer->char 92))(set! pos 79)] ;Ó
-      [(= pos 218)(display (integer->char 92))(set! pos 85)]) ;Ú
+      [(= pos 225)(set! res (string-append res (string (integer->char 92))))(set! pos 97)] ;á
+      [(= pos 233)(set! res (string-append res (string (integer->char 92))))(set! pos 101)] ;é
+      [(= pos 237)(set! res (string-append res (string (integer->char 92))))(set! pos 105)] ;í
+      [(= pos 243)(set! res (string-append res (string (integer->char 92))))(set! pos 111)] ;ó
+      [(= pos 250)(set! res (string-append res (string (integer->char 92))))(set! pos 117)] ;ú
+      [(= pos 193)(set! res (string-append res (string (integer->char 92))))(set! pos 65)] ;Á
+      [(= pos 201)(set! res (string-append res (string (integer->char 92))))(set! pos 69)] ;É
+      [(= pos 205)(set! res (string-append res (string (integer->char 92))))(set! pos 73)] ;Í
+      [(= pos 211)(set! res (string-append res (string (integer->char 92))))(set! pos 79)] ;Ó
+      [(= pos 218)(set! res (string-append res (string (integer->char 92))))(set! pos 85)]) ;Ú
    (if (= pos 92)
-       (display letra))
+       (set! res (string-append res (string letra))))
    (cond
-     [(and (>= pos 97) (<= pos 122))(if (>= (- (+ pos posLlave) 97) 123)(display (integer->char (- (- (+ pos posLlave) 97) 26)))(display (integer->char (- (+ pos posLlave) 97))))]
-     [(and (>= pos 65) (<= pos 90))(if (>= (- (+ pos posLlave) 97) 91)(display (integer->char (- (- (+ pos posLlave) 97) 26)))(display (integer->char (- (+ pos posLlave) 97))))]
-     [else(display letra)]
-     )))
+     [(and (>= pos 97) (<= pos 122))(if (>= (- (+ pos posLlave) 97) 123)(set! res (string-append res (string (integer->char (- (- (+ pos posLlave) 97) 26)))))(set! res (string-append res (string (integer->char (- (+ pos posLlave) 97))))))]
+     [(and (>= pos 65) (<= pos 90))(if (>= (- (+ pos posLlave) 97) 91)(set! res (string-append res (string (integer->char (- (- (+ pos posLlave) 97) 26)))))(set! res (string-append res (string (integer->char (- (+ pos posLlave) 97))))))]
+     [else(set! res (string-append res (string letra)))]
+     ))
+  res)
 
 (define (decodificadorMate palabra)
   (define letra "")
@@ -67,6 +69,7 @@
   (define letraLlave "")
   (define posLlave 0)
   (define tilde #f)
+  (define res "")
   (do
       ((cont 0 (+ cont 1)))
     ((= cont (string-length palabra)))
@@ -78,16 +81,16 @@
     (if (equal? tilde #t)
         (begin
           (cond
-            [(= (- (+ pos 97) posLlave) 97)(display "á")] ;á
-            [(= (- (+ pos 97) posLlave) 101)(display "é")] ;é
-            [(= (- (+ pos 97) posLlave) 105)(display "í")] ;í
-            [(= (- (+ pos 97) posLlave) 111)(display "ó")] ;ó
-            [(= (- (+ pos 97) posLlave) 117)(display "ú")] ;ú
-            [(= (- (+ pos 97) posLlave) 65)(display "Á")] ;Á
-            [(= (- (+ pos 97) posLlave) 69)(display "É")] ;É
-            [(= (- (+ pos 97) posLlave) 73)(display "Í")] ;Í
-            [(= (- (+ pos 97) posLlave) 79)(display "Ó")] ;Ó
-            [(= (- (+ pos 97) posLlave) 85)(display "Ú")]) ;Ú
+            [(= (- (+ pos 97) posLlave) 97)(set! res (string-append res "á"))] ;á
+            [(= (- (+ pos 97) posLlave) 101)(set! res (string-append res "é"))] ;é
+            [(= (- (+ pos 97) posLlave) 105)(set! res (string-append res "í"))] ;í
+            [(= (- (+ pos 97) posLlave) 111)(set! res (string-append res "ó"))] ;ó
+            [(= (- (+ pos 97) posLlave) 117)(set! res (string-append res "ú"))] ;ú
+            [(= (- (+ pos 97) posLlave) 65)(set! res (string-append res "Á"))] ;Á
+            [(= (- (+ pos 97) posLlave) 69)(set! res (string-append res "É"))] ;É
+            [(= (- (+ pos 97) posLlave) 73)(set! res (string-append res "Í"))] ;Í
+            [(= (- (+ pos 97) posLlave) 79)(set! res (string-append res "Ó"))] ;Ó
+            [(= (- (+ pos 97) posLlave) 85)(set! res (string-append res "Ú"))]) ;Ú
           (set! tilde #f))
         (begin
           (if (= pos 92)
@@ -96,11 +99,12 @@
                 (if (or (and (>= posLlave 97) (<= posLlave 122)) (and (>= posLlave 65) (<= posLlave 90)))
                     (begin
                       (cond
-                        [(and (>= pos 97) (<= pos 122))(if (<= (- (+ pos 97) posLlave) 96)(display (integer->char (+ (- (+ pos  97) posLlave) 26)))(display (integer->char (- (+ pos  97) posLlave))))]
-                        [(and (>= pos 65) (<= pos 90))(if (<= (- (+ pos 97) posLlave) 91)(display (integer->char (+ (- (+ pos 97) posLlave) 26)))(display (integer->char (- (+ pos  97) posLlave))))]
+                        [(and (>= pos 97) (<= pos 122))(if (<= (- (+ pos 97) posLlave) 96)(set! res (string-append res (string (integer->char (+ (- (+ pos  97) posLlave) 26)))))(set! res (string-append res (string (integer->char (- (+ pos  97) posLlave))))))]
+                        [(and (>= pos 65) (<= pos 90))(if (<= (- (+ pos 97) posLlave) 91)(set! res (string-append res (string (integer->char (+ (- (+ pos 97) posLlave) 26)))))(set! res (string-append res (string (integer->char (- (+ pos  97) posLlave))))))]
                         ))
-                    (display letra)))))
-        )))
+                    (set! res (string-append res (string letra)))))))
+        ))
+  res)
 
 
 (define (setkey nueva)
@@ -231,33 +235,75 @@
 
 (define (encode-text var2)
   (usekey var2)
-  (display var3)(newline)
-  ;(display (string-append "resultado >> " (codificar var2) "\n"))
-  (display "resultado >> ")
-  (codificadorMate var2)(newline)
+  (if (equal? (pregunta) #f)
+      (display (string-append "resultado >> " (codificadorMate var2) "\n"))
+      (display (string-append "resultado >> " (codificar var2) "\n")))
   (inicio)
   )
 
 (define (decode-text var2)
   (usekey var2)
-  (display "resultado >> ")
-  (decodificadorMate var2)(newline)
+  (display var3)
+  ;(if (equal? (pregunta) #f)
+       (display (string-append "resultado >> " (decodificadorMate var2) "\n"))
+      ;(display (string-append "resultado >> " (decodificar var2) "\n")))
   (inicio)
   )
 
 (define (encode-file var2)
+  (define in "")
+  (define out "")
+  (define metodo #f)
   (if (file-exists? var2)
       (begin
-        (display "Si existe")
+        (set! in (open-input-file var2))
+        (set! out (open-output-file (string-append (substring var2 0 (- (string-length var2) 3)) "gcf")))
+        (set! metodo (pregunta))
+        (do
+            ((linea (read-line in) (read-line in))
+             (ultimo #f))
+          ((equal? ultimo #t))
+          (usekey linea)
+          (if (equal? metodo #f)
+              (begin
+                (display (codificadorMate linea) out)(newline out))
+              (begin
+                (display (codificar linea) out)(newline out)))          
+          (set! ultimo (eof-object? (peek-char in)))
+          )
+        (close-input-port in)
+        (close-output-port out)
+        (display (string-append "archivo codificado en " (string-append (substring var2 0 (- (string-length var2) 3)) "gcf")))
+        (newline)(inicio)
         )
       (invalido)
-      )
-  )
+      ))
 
 (define (decode-file var2)
+  (define in "")
+  (define out "")
+  ;(define metodo #f)
   (if (file-exists? var2)
       (begin
-        (display "Si existe")
+        (set! in (open-input-file var2))
+        (set! out (open-output-file (string-append (substring var2 0 (- (string-length var2) 4)) "-decoded.txt")))
+        ;(set! metodo (pregunta))
+        (do
+            ((linea (read-line in) (read-line in))
+             (ultimo #f))
+          ((equal? ultimo #t))
+          (usekey linea)
+          ;(if (equal? metodo #f)
+              ;(begin
+                (display (decodificadorMate linea) out)(newline out);)
+              ;(begin
+                ;(display (decodificar linea) out)(newline out)))          
+          (set! ultimo (eof-object? (peek-char in)))
+          )
+        (close-input-port in)
+        (close-output-port out)
+        (display (string-append "archivo codificado en " (string-append (substring var2 0 (- (string-length var2) 4)) "-decoded.txt")))
+        (newline)(inicio)
         )
       (invalido)
       )
@@ -291,8 +337,17 @@
   )
 )
 
+(define (pregunta)
+  (display "Escoja su metodo matematico/matriz >> ")
+  (define res (read-line))
+  (cond
+    [(equal? res "matematico")#f]
+    [(equal? res "matriz")#t]
+    [else(display "Error! ")(pregunta)])
+  )
+
 (define (inicio)
-  (display "Codificador>>")
+  (display "Codificador >> ")
   (define instruccion (read-line))
   (menu instruccion)
 )
