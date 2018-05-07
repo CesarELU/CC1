@@ -384,7 +384,12 @@
   (if (file-exists? var2)
       (begin
         (set! in (open-input-file var2))
-        (set! out (open-output-file (string-append (substring var2 0 (- (string-length var2) 3)) "gcf")))
+        (if (file-exists? (string-append (substring var2 0 (- (string-length var2) 3)) "gcf"))
+            (begin
+              (display "Error! Ya existe un archivo codificado del archivo ingresado.")(newline)
+              (inicio)
+              )
+            (set! out (open-output-file (string-append (substring var2 0 (- (string-length var2) 3)) "gcf"))))
         (set! metodo (pregunta))
         (do
             ((linea (read-line in) (read-line in))
@@ -413,7 +418,11 @@
   (if (file-exists? var2)
       (begin
         (set! in (open-input-file var2))
-        (set! out (open-output-file (string-append (substring var2 0 (- (string-length var2) 4)) "-decoded.txt")))
+        (if (file-exists? (string-append (substring var2 0 (- (string-length var2) 4)) "-decoded.txt"))
+            (begin
+              (display "Error! Ya existe un archivo decodificado del archivo ingresado.")(newline)
+              (inicio))
+              (set! out (open-output-file (string-append (substring var2 0 (- (string-length var2) 4)) "-decoded.txt"))))
         (set! metodo (pregunta))
         (do
             ((linea (read-line in) (read-line in))
@@ -454,8 +463,13 @@
   (if (not (= pos (string-length instruccion)))
       (set! var2 (substring instruccion (+ pos 1) (string-length instruccion)))
       )
+  
   (if (and (= (string-length var2) 0) (not (equal? var "quit")))
       (invalido))
+  (if (and (not (equal? "setkey" var)) (> (string-length var2) 0))
+      (begin
+        (display "Error! debe ingresar una llave.")(newline)
+        (inicio)))
   
   (cond 
     [(equal? "setkey" var)(display "resultado >> nueva llave aceptada \n")(setkey var2)(inicio)]
