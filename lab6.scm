@@ -151,6 +151,131 @@
   res
   )
 
+(define (decodificar var2)
+  (define pos1 0)
+  (define pos2 0)
+  (define res "")
+  (define let "")
+  (define tild #f)
+  (do
+      ([pos 0 (+ pos 1)]
+       [pas #f #f])
+    ((= pos (string-length var2)) )
+    (set! let (string-ref var2 pos))
+    (if (or (and (> (char->integer let) 64)(< (char->integer let) 91))(and (> (char->integer let) 96)(< (char->integer let) 123)))
+        (set! pas #t)
+    )
+
+    (if (char=? let #\\)
+        (begin
+          (set! tild #t)
+          (set! pos (+ pos 1))
+          (set! let (string-ref var2 pos))
+        )
+        )
+
+    (if (or pas tild)
+        (begin
+          (do
+              ([cont 0 (+ cont 1)])
+            ((char=? (vector-ref (vector-ref matriz 0) cont)(char-upcase (string-ref var3 pos))) (set! pos1 cont))
+            )
+          
+          (do
+              ([cont 0 (+ cont 1)])
+            ((char=? (vector-ref (vector-ref matriz pos1) cont)(char-upcase (string-ref var2 pos))) (set! pos2 cont))
+              )
+          
+          (cond
+           [(and (not tild)(> (char->integer let) 64)(< (char->integer let) 91)) (set! res (string-append res (string (char-upcase (vector-ref (vector-ref matriz 0) pos2)))))]
+           [(and (not tild)(> (char->integer let) 96)(< (char->integer let) 123)) (set! res (string-append res (string (char-downcase (vector-ref (vector-ref matriz 0) pos2)))))]
+          )
+
+          (if tild
+              (begin
+                (if (and (> (char->integer let) 64)(< (char->integer let) 91))
+                    (begin
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\A)
+                          (begin
+                            (set! res (string-append res (string #\Á)))
+                            (set! tild #f)
+                            )
+                          )
+    
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\E)
+                          (begin
+                            (set! res (string-append res (string #\É)))
+                            (set! tild #f)
+                            )
+                          )
+    
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\I)
+                          (begin
+                            (set! res (string-append res (string #\Í)))
+                            (set! tild #f)
+                            )
+                          )
+    
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\O)
+                          (begin
+                            (set! res (string-append res (string #\Ó)))
+                            (set! tild #f)
+                            )
+                          )
+                      
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\U)
+                          (begin
+                            (set! res (string-append res (string #\Ú)))
+                            (set! tild #f)
+                            )
+                          )
+                      )
+                    (begin
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\A)
+                          (begin
+                            (set! res (string-append res (string #\á)))
+                            (set! tild #f)
+                            )
+                          )
+                      
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\E)
+                          (begin
+                            (set! res (string-append res (string #\é)))
+                            (set! tild #f)
+                            )
+                          )
+    
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\I)
+                          (begin
+                            (set! res (string-append res (string #\í)))
+                            (set! tild #f)
+                            )
+                          )
+                      
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\O)
+                          (begin
+                            (set! res (string-append res (string #\ó)))
+                            (set! tild #f)
+                            )
+                          )
+    
+                      (if (char=? (vector-ref (vector-ref matriz 0) pos2) #\U)
+                          (begin
+                            (set! res (string-append res (string #\ú)))
+                            (set! tild #f)
+                            )
+                          )
+                      )
+                    )
+                )
+              )
+          )
+        (set! res (string-append res (substring var2 pos (+ pos 1))))
+        )
+    )
+  res
+  )
+
 (define (quit)
   (display "Saliendo ... \n")
   (display "Gracias por usar nuestro codificador \n")
