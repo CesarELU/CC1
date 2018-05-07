@@ -1,5 +1,5 @@
-(define llave "")             ;llave global
-(define matriz (vector        ;matriz del abecedario
+(define llave "")
+(define matriz (vector
   (vector #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z)
   (vector #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A)
   (vector #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y #\Z #\A #\B)
@@ -28,9 +28,8 @@
   (vector #\Z #\A #\B #\C #\D #\E #\F #\G #\H #\I #\J #\K #\L #\M #\N #\O #\P #\Q #\R #\S #\T #\U #\V #\W #\X #\Y)
   )
  )
-(define var3 "")         ;variable utilizada para la asignación de la llave respecto al texto ingresado
+(define var3 "")
 
-;codificador con procedimiento matematico
 (define (codificadorMate palabra)
   (define letra "")
   (define pos 0)
@@ -64,7 +63,6 @@
      ))
   res)
 
-;decodificador con procedimiento matematico
 (define (decodificadorMate palabra)
   (define letra "")
   (define pos 0)
@@ -108,7 +106,7 @@
         ))
   res)
 
-;funcion que asigna la variable que ingrese el usuario
+
 (define (setkey nueva)
   (do
       ((cont 0 (+ cont 1)))
@@ -117,7 +115,6 @@
         (invalido)))
   (set! llave nueva))
 
-;función que utiliza valores de código ascii para evaluar si lo que se ingresa son letras
 (define (distinto chr)
   (define res #f)
   (let ciclo
@@ -129,24 +126,16 @@
          )
      )
     )
-  ;sección de vocales con tilde
   (cond
-    [(char=? chr #\á) (set! res #t)]
     [(char=? chr #\é) (set! res #t)]
+    [(char=? chr #\á) (set! res #t)]
     [(char=? chr #\í) (set! res #t)]
     [(char=? chr #\ó) (set! res #t)]
     [(char=? chr #\ú) (set! res #t)]
-    [(char=? chr #\Á) (set! res #t)]
-    [(char=? chr #\É) (set! res #t)]
-    [(char=? chr #\Í) (set! res #t)]
-    [(char=? chr #\Ó) (set! res #t)]
-    [(char=? chr #\Ú) (set! res #t)]
     )
   res
   )
-
-;función que utiliza la función (distinto) para asignar una letra de la llave correspondiendo con su posición del
-;texto si esta es una letra
+  
 (define (usekey var2)
   (set! var3 "")
   (do
@@ -166,9 +155,7 @@
     )
  )
 
-;codificador utilizando la matriz
 (define (codificar var2)
-  ;variables utilizadas como banderas u posiciones
   (define pos1 0)
   (define pos2 0)
   (define res "")
@@ -182,19 +169,18 @@
         (set! pas #t)
     )
   
-    ;sección a evaluar tildes
-    (if (char=? let #\á)
-        (begin
-          (set! res (string-append res (string #\\)))
-          (set! let #\a)
-          (set! pas #t)
-          )
-        )
-    
     (if (char=? let #\é)
         (begin
           (set! res (string-append res (string #\\)))
           (set! let #\e)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\á)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\a)
           (set! pas #t)
           )
         )
@@ -222,48 +208,7 @@
           (set! pas #t)
           )
       )
-
-    (if (char=? let #\Á)
-        (begin
-          (set! res (string-append res (string #\\)))
-          (set! let #\A)
-          (set! pas #t)
-          )
-        )
     
-    (if (char=? let #\É)
-        (begin
-          (set! res (string-append res (string #\\)))
-          (set! let #\E)
-          (set! pas #t)
-          )
-        )
-    
-    (if (char=? let #\Í)
-        (begin
-          (set! res (string-append res (string #\\)))
-          (set! let #\I)
-          (set! pas #t)
-          )
-        )
-    
-    (if (char=? let #\Ó)
-        (begin
-          (set! res (string-append res (string #\\)))
-          (set! let #\O)
-          (set! pas #t)
-          )
-        )
-    
-    (if (char=? let #\Ú)
-        (begin
-          (set! res (string-append res (string #\\)))
-          (set! let #\U)
-          (set! pas #t)
-          )
-      )
-    
-    ;asignación de valores al string respuesta
     (if pas
         (begin
           (do
@@ -285,9 +230,7 @@
   res
   )
 
-;decodificador utilizando la matriz
 (define (decodificar var2)
-  ;variables utilizadas como banderas o posiciones
   (define pos1 0)
   (define pos2 0)
   (define res "")
@@ -302,7 +245,6 @@
         (set! pas #t)
     )
 
-    ;evaluar si la siguiente letra lleva tilde
     (if (char=? let #\\)
         (begin
           (set! tild #t)
@@ -311,7 +253,6 @@
         )
         )
 
-    ;asignación de valores al string respuesta
     (if (or pas tild)
         (begin
           (do
@@ -329,7 +270,6 @@
            [(and (not tild)(> (char->integer let) 96)(< (char->integer let) 123)) (set! res (string-append res (string (char-downcase (vector-ref (vector-ref matriz 0) pos2)))))]
           )
 
-          ;en caso de que este posea una tilde evaluara cual de estas es y la asignara al string respuesta
           (if tild
               (begin
                 (if (and (> (char->integer let) 64)(< (char->integer let) 91))
@@ -415,32 +355,28 @@
   res
   )
 
-;función quit, finalización del programa
 (define (quit)
   (display "Saliendo ... \n")
   (display "Gracias por usar nuestro codificador \n")
   )
 
-;función encode-text, codifica el texto escrito despues del la palabra clave
 (define (encode-text var2)
   (usekey var2)
-  (if (equal? (pregunta) #f)     ;evalua cuál metodo utilizara para codificar
+  (if (equal? (pregunta) #f)
       (display (string-append "resultado >> " (codificadorMate var2) "\n"))
       (display (string-append "resultado >> " (codificar var2) "\n")))
   (inicio)
   )
 
-;función decode-text, decodifica el texto escrito despues de la palabra clave
 (define (decode-text var2)
   (usekey var2)
   (display var3)
-  (if (equal? (pregunta) #f)     ;evalua cuál metodo utilizara para decodificar
+  (if (equal? (pregunta) #f)
        (display (string-append "resultado >> " (decodificadorMate var2) "\n"))
        (display (string-append "resultado >> " (decodificar var2) "\n")))
   (inicio)
   )
 
-;función encode-file, codifica el texto que este dentro de un archivo, y asignandolo a otro archivo .gcf que este crea.
 (define (encode-file var2)
   (define in "")
   (define out "")
@@ -460,7 +396,7 @@
              (ultimo #f))
           ((equal? ultimo #t))
           (usekey linea)
-          (if (equal? metodo #f)    ;evalua el metodo por el cual sera codificado
+          (if (equal? metodo #f)
               (begin
                 (display (codificadorMate linea) out)(newline out))
               (begin
@@ -475,7 +411,6 @@
       (invalido)
       ))
 
-;función decode-file, decodifica el texto de un archivo, y asignandolo a otro archivo .txt que este crea.
 (define (decode-file var2)
   (define in "")
   (define out "")
@@ -494,7 +429,7 @@
              (ultimo #f))
           ((equal? ultimo #t))
           (usekey linea)
-          (if (equal? metodo #f)     ;evalua el metodo por el cual sera decodificado
+          (if (equal? metodo #f)
               (begin
                 (display (decodificadorMate linea) out)(newline out))
               (begin
@@ -510,13 +445,11 @@
       )
   )
 
-;devuelve texto de Error
 (define (invalido)
   (display "ERROR: Expresión invalida \n")
   (inicio)
   )
 
-;función menu, lee la instruncción que ingreso el usuario y la segmenta por palabras clave y texto.
 (define (menu instruccion)
   (define pos 0)
   (define var "")
@@ -538,7 +471,6 @@
         (display "Error! debe ingresar una llave.")(newline)
         (inicio)))
   
-  ;evalua cual de todas las palbras clave es y hace una llamada a la función
   (cond 
     [(equal? "setkey" var)(display "resultado >> nueva llave aceptada \n")(setkey var2)(inicio)]
     [(equal? "quit" var)(quit)]
@@ -550,7 +482,6 @@
   )
 )
 
-;pregunta por el metodo que se utilizara para codificar
 (define (pregunta)
   (display "Escoja su metodo matematico/matriz >> ")
   (define res (read-line))
@@ -560,15 +491,6 @@
     [else(display "Error! ")(pregunta)])
   )
 
-
-(display "¡Bienvenido al codificador! \n")
-(display "Programa diseñado por el grupo 1C. \n")
-(display "Formado por: \n")
-(display "Ana Karen Caballeros Blanco \n")
-(display "César Eduardo López Urizar \n")
-
-;función de texto para que el usuario pueda escribir más instrucciónes, la cual es llamada despues de cada otra función
-;de las palabras clave.
 (define (inicio)
   (display "Codificador >> ")
   (define instruccion (read-line))
