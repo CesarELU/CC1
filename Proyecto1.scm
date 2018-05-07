@@ -136,6 +136,11 @@
     [(char=? chr #\í) (set! res #t)]
     [(char=? chr #\ó) (set! res #t)]
     [(char=? chr #\ú) (set! res #t)]
+    [(char=? chr #\Á) (set! res #t)]
+    [(char=? chr #\É) (set! res #t)]
+    [(char=? chr #\Í) (set! res #t)]
+    [(char=? chr #\Ó) (set! res #t)]
+    [(char=? chr #\Ú) (set! res #t)]
     )
   res
   )
@@ -214,6 +219,46 @@
         (begin
           (set! res (string-append res (string #\\)))
           (set! let #\u)
+          (set! pas #t)
+          )
+      )
+
+    (if (char=? let #\Á)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\A)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\É)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\E)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\Í)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\I)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\Ó)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\O)
+          (set! pas #t)
+          )
+        )
+    
+    (if (char=? let #\Ú)
+        (begin
+          (set! res (string-append res (string #\\)))
+          (set! let #\U)
           (set! pas #t)
           )
       )
@@ -513,6 +558,12 @@
     [(equal? res "matriz")#t]
     [else(display "Error! ")(pregunta)])
   )
+
+(display "¡Bienvenido al codificador! \n")
+(display "Programa diseñado por el grupo 1C. \n")
+(display "Formado por: \n")
+(display "Ana Karen Caballeros Blanco \n")
+(display "César Eduardo López Urizar \n")
 
 ;función de texto para que el usuario pueda escribir más instrucciónes, la cual es llamada despues de cada otra función
 ;de las palabras clave.
