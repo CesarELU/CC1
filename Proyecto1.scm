@@ -498,3 +498,8 @@
 )
 
 (inicio)
+
+; Ciencias de la Computación I
+; Grupo 1C
+; Ana Karen Caballeros Blanco   Carné: 18001769
+; Césa Eduardo López Urizar     Carné: 18001119
